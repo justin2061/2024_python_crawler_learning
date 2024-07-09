@@ -1,0 +1,23 @@
+version: "3.3"
+
+services:
+  notebook:
+    image: jupyter/pytorch-notebook
+    container_name: jupyter
+    hostname: jupyter
+    restart: unless-stopped
+    volumes:
+      - ./work:/home/jovyan/work
+      - ./jupyter_notebook_config.py:/home/jovyan/.jupyter/jupyter_notebook_config.py
+    ports:
+      - 9999:8888
+    environment:
+      - TZ=Asia/Taipei
+      - JUPYTER_ENABLE_LAB=yes
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
