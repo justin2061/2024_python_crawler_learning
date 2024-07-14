@@ -12,7 +12,6 @@ work/home
 work/Gensim/news_crawl_result.txt
 .ipynb_checkpoints
 *.pyc
-fonts/
 *.ttf
 
 #large files
