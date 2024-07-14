@@ -12,7 +12,7 @@ work/home
 work/Gensim/news_crawl_result.txt
 .ipynb_checkpoints
 *.pyc
-*.ttf
+
 
 #large files
 work/pytorch_model.bin
