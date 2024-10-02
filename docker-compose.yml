@@ -3,8 +3,8 @@ version: "3.3"
 services:
   notebook:
     image: jupyter/base-notebook
-    container_name: jupyter
-    hostname: jupyter
+    container_name: notebook
+    hostname: notebook
     restart: unless-stopped
     volumes:
       - ./work:/home/jovyan/work
@@ -14,3 +14,27 @@ services:
     environment:
       - TZ=Asia/Taipei
       - JUPYTER_ENABLE_LAB=yes
+      
+  selenium-hub:
+    image: selenium/hub:4.8.1-20230306
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+    
+  chrome:
+    image: selenium/node-chrome:4.8.1-20230306
+    shm_size: 2gb
+    container_name: selenium-chrome
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_SESSION_TIMEOUT=600
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_NODE_MAX_SESSIONS=10
+    ports:
+      - 5901:5900

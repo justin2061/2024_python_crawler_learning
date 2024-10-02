@@ -47,6 +47,10 @@ tfenv
 aclImdb
 logs
 
+*.log
+*.log.*
+*.log-*
+
 .env
 .csv
 .tsv
@@ -55,3 +59,5 @@ venv
 dest
 *log
 wayback_archive
+
+*.png
